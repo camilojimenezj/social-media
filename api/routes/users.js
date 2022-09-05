@@ -37,12 +37,21 @@ userRouter.post('/', async (req, res) => {
   res.status(201).json(savedUser)
 })
 
-userRouter.put('/:id', async(req, res) => {
-  /* const img = req.file */
+userRouter.put('/:id', async (req, res) => {
+  const img = req.files?.img.tempFilePath
   const id = req.params.id
+  let newUserInfo
+  if (img) {
+    newUserInfo = {
+      ...req.body,
+      img
+    }
+  } else {
+    newUserInfo = { ...req.body }
+  }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true })
   
     res.status(200).json(updatedUser)
     

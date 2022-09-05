@@ -13,15 +13,19 @@ postRouter.get('/', async (req, res) => {
 postRouter.post('/', async (req, res, next) => {
   try {
     const { content, userId } = req.body
-    // update later to add images
+    const img = req.files?.img.tempFilePath
 
     const user = await User.findById(userId)
 
-    const newPost = new Post({
+    const newPostInfo = {
       content,
       date: Date.now(),
       user: user._id
-    })
+    }
+
+    if(img) newPostInfo.img = img
+
+    const newPost = new Post(newPostInfo)
 
     const savedPost = await newPost.save()
     user.posts = user.posts.concat(savedPost._id)
