@@ -11,6 +11,9 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+// routes
+app.use('/', require('./routes/index'))
+
 // start server 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
