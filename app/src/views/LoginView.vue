@@ -1,76 +1,22 @@
 <template>
-  <div class="my-container">
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Text input" />
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Username</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input is-success"
-          type="text"
-          placeholder="Text input"
-          value="bulma"
-        />
-        <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-      <p class="help is-success">This username is available</p>
-    </div>
-
+  <form class="my-container">
+    <div class="title">Log in</div>
     <div class="field">
       <label class="label">Email</label>
-      <div class="control has-icons-left has-icons-right">
+      <div class="control">
+        <input class="input" type="email" placeholder="Text input" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
         <input
-          class="input is-danger"
-          type="email"
-          placeholder="Email input"
-          value="hello@"
+          class="input"
+          type="password"
+          placeholder="Text input"
+          required
         />
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
-
-    <div class="field">
-      <label class="label">Message</label>
-      <div class="control">
-        <textarea class="textarea" placeholder="Textarea"></textarea>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
-          <input type="checkbox" />
-          I agree to the <a href="#">terms and conditions</a>
-        </label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <label class="radio">
-          <input type="radio" name="question" />
-          Yes
-        </label>
-        <label class="radio">
-          <input type="radio" name="question" />
-          No
-        </label>
       </div>
     </div>
 
@@ -82,7 +28,7 @@
         <button class="button is-link is-light">Cancel</button>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -92,9 +38,9 @@ export default {}
 <style scoped>
 .my-container {
   max-width: 600px;
-  margin: 30px auto;
+  margin: 150px auto;
   padding: 25px;
   border-radius: 20px;
-  border: 1px solid rgb(221, 221, 221);
+  border: 1px solid rgba(221, 221, 221, 0.486);
 }
 </style>

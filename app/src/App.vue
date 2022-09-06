@@ -4,8 +4,8 @@ import Navar from './components/Navar.vue'
 </script>
 
 <template>
+  <Navar />
   <div class="container">
-    <Navar />
     <main class="my-main">
       <RouterView />
     </main>

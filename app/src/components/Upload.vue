@@ -24,10 +24,13 @@
   </div>
 </template>
 
-<style>
+<script>
+export default {}
+</script>
+
+<style scoped>
 .box {
   width: 600px;
-  margin: 20px auto;
 }
 .top {
   display: flex;
