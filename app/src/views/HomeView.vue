@@ -1,7 +1,6 @@
 <template>
   <div class="my-container">
-    {{ this.GStore.session.userId }}
-    <Upload />
+    <Upload @setNewPost="(data) => setNewPost(data)" />
     <Post v-for="post in allPosts" :key="post.id" :post="post" />
   </div>
 </template>
@@ -18,9 +17,14 @@ export default {
       allPosts: [],
     }
   },
+  methods: {
+    setNewPost(newPost) {
+      this.allPosts.unshift(newPost)
+    },
+  },
   created() {
     getAllPosts().then((res) => {
-      this.allPosts = res
+      this.allPosts = res.reverse()
     })
   },
 }

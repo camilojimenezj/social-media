@@ -24,7 +24,7 @@ export default {
   },
   created() {
     getAllPosts().then((res) => {
-      this.allPosts = res
+      this.allPosts = res.reverse()
     })
   },
 }

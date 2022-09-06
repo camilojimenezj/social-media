@@ -18,6 +18,8 @@ export default {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       this.GStore.session = user
+    } else {
+      this.$router.push('/login')
     }
   },
 }

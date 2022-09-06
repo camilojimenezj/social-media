@@ -6,3 +6,9 @@ export const getAllPosts = async (type) => {
   const { data } = res
   return data
 }
+
+export const createPost = async (post) => {
+  const res = await axios.post(baseUrl, post)
+  const { data } = res
+  return data
+}

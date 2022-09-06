@@ -13,8 +13,12 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">{{ post.user.name }}</p>
-            <p class="subtitle is-6">@{{ post.user.name }}</p>
+            <p class="title is-4">
+              {{ post.user?.name || this.GStore.session.name }}
+            </p>
+            <p class="subtitle is-6">
+              @{{ post.user?.name || this.GStore.session.name }}
+            </p>
           </div>
         </div>
 
@@ -24,7 +28,7 @@
           <time datetime="2016-1-1">{{ dateString }}</time>
         </div>
       </div>
-      <div class="card-image">
+      <div class="card-image" v-if="post.img">
         <figure class="image">
           <img :src="post.img" alt="Placeholder image" />
         </figure>
@@ -47,6 +51,7 @@
 <script>
 import CommentsModal from './CommentsModal.vue'
 export default {
+  inject: ['GStore'],
   props: {
     post: {
       type: Object,
@@ -79,7 +84,7 @@ export default {
 
 <style scoped>
 .my-card {
-  max-width: 600px;
+  width: 600px;
 }
 .icons-container {
   width: 100%;

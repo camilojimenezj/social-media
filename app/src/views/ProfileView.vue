@@ -1,6 +1,5 @@
 <template>
   <div class="my-container" v-if="userData">
-    {{ userData }}
     <ProfileInfo :userData="userData" @profileModal="profileModal" />
     <Post v-for="post in userData.posts" :key="post.id" :post="post" />
     <ProfileModal
