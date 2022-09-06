@@ -53,6 +53,7 @@ export default {
 .my-container {
   width: 600px;
   margin: 30px auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,5 +64,10 @@ export default {
 }
 .user-container {
   width: 100%;
+}
+@media screen and (max-width: 700px) {
+  .my-container {
+    width: 100%;
+  }
 }
 </style>

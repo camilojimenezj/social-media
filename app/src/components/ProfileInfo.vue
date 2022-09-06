@@ -3,7 +3,10 @@
     <div class="box">
       <div class="top">
         <figure class="image is-128x128">
-          <img class="is-rounded" :src="userImg" alt="Placeholder image" />
+          <div
+            class="user-image"
+            :style="{ backgroundImage: `url(${userImg})` }"
+          ></div>
         </figure>
         <div class="username">
           <div class="title is-4">{{ userData.name }}</div>
@@ -45,5 +48,18 @@ export default {
   display: flex;
   gap: 30px;
   margin-bottom: 15px;
+}
+.user-image {
+  width: 128px;
+  height: 128px;
+  border-radius: 100vmax;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+@media screen and (max-width: 700px) {
+  .box {
+    width: 100vw;
+  }
 }
 </style>

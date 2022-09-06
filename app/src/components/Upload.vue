@@ -3,7 +3,10 @@
     <form class="box" @submit="handleSubmit">
       <div class="top">
         <figure class="image is-48x48">
-          <img class="is-rounded" :src="userImg" alt="Placeholder image" />
+          <div
+            class="user-image"
+            :style="{ backgroundImage: `url(${userImg})` }"
+          ></div>
         </figure>
         <div class="control text-container">
           <textarea
@@ -104,5 +107,22 @@ export default {
   font-size: 40px;
   color: #2f81edd9;
   cursor: pointer;
+}
+.user-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 100vmax;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.file-cta {
+  background-color: white;
+  border: none;
+}
+@media screen and (max-width: 700px) {
+  .box {
+    width: 100vw;
+  }
 }
 </style>

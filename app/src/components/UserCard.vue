@@ -2,11 +2,14 @@
   <div class="media">
     <div class="media-left">
       <figure class="image is-48x48">
-        <img
-          class="is-rounded"
-          :src="user.img || 'https://bulma.io/images/placeholders/96x96.png'"
-          alt="Placeholder image"
-        />
+        <div
+          class="user-image"
+          :style="{
+            backgroundImage: `url(${
+              user.img || 'https://bulma.io/images/placeholders/96x96.png'
+            })`,
+          }"
+        ></div>
       </figure>
     </div>
     <div class="media-content">
@@ -40,5 +43,13 @@ export default {
 <style scoped>
 .username {
   cursor: pointer;
+}
+.user-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 100vmax;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 </style>
