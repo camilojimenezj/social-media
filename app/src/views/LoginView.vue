@@ -1,5 +1,5 @@
 <template>
-  <form class="my-container">
+  <form class="box my-container">
     <div class="title">Log in</div>
     <div class="field">
       <label class="label">Email</label>
@@ -40,7 +40,5 @@ export default {}
   max-width: 600px;
   margin: 150px auto;
   padding: 25px;
-  border-radius: 20px;
-  border: 1px solid rgba(221, 221, 221, 0.486);
 }
 </style>

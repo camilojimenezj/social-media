@@ -1,48 +1,36 @@
 <template>
-  <div>
-    <div class="box">
-      <div class="top">
-        <figure class="image is-48x48">
-          <img
-            class="is-rounded"
-            src="https://bulma.io/images/placeholders/96x96.png"
-            alt="Placeholder image"
-          />
-        </figure>
-        <div class="control text-container">
-          <textarea
-            class="textarea has-fixed-size"
-            placeholder="What’s happening?"
-          ></textarea>
-        </div>
-      </div>
-      <div class="bottom">
-        <span class="material-icons-outlined img-upload"> image </span>
-        <button class="button is-info">Tweet</button>
-      </div>
-    </div>
+  <div class="my-container">
+    <ProfileInfo @handleModal="handleModal" />
+    <Post />
+    <Modal v-if="modalActive" @handleModal="handleModal" />
   </div>
 </template>
 
-<style>
-.box {
-  width: 600px;
-  margin: 20px auto;
+<script>
+import ProfileInfo from '../components/ProfileInfo.vue'
+import Post from '../components/Post.vue'
+import Modal from '../components/Modal.vue'
+export default {
+  components: { ProfileInfo, Post, Modal },
+  data() {
+    return {
+      modalActive: false,
+    }
+  },
+  methods: {
+    handleModal() {
+      this.modalActive = !this.modalActive
+    },
+  },
 }
-.top {
+</script>
+
+<style scoped>
+.my-container {
+  margin: 30px 0;
   display: flex;
-}
-.text-container {
-  width: 100%;
-  margin: 0 10px;
-}
-.bottom {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-.img-upload {
-  font-size: 40px;
-  color: #2f81edd9;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
 }
 </style>
