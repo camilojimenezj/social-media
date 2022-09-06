@@ -13,22 +13,23 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+            <p class="title is-4">{{ post.user.name }}</p>
+            <p class="subtitle is-6">@{{ post.user.name }}</p>
           </div>
         </div>
 
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-          <a href="#">#responsive</a>
+          {{ post.content }}
           <br />
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <time datetime="2016-1-1">{{ dateString }}</time>
         </div>
       </div>
       <div class="card-image">
         <figure class="image">
-          <img src="/tmp-1-1662412083487" alt="Placeholder image" />
+          <img
+            src="http://localhost:3000/tmp/tmp-1-1662412314230"
+            alt="Placeholder image"
+          />
         </figure>
       </div>
       <div class="icons-container">
@@ -49,6 +50,11 @@
 <script>
 import CommentsModal from './CommentsModal.vue'
 export default {
+  props: {
+    post: {
+      type: Object,
+    },
+  },
   data() {
     return {
       likeColor: 'black',
@@ -60,6 +66,14 @@ export default {
     },
     commentsModal() {
       this.$el.querySelector('.comments-modal').classList.toggle('is-active')
+    },
+  },
+  computed: {
+    dateString() {
+      const date = this.post.date
+      const newDate = new Date(date)
+
+      return newDate.toDateString()
     },
   },
   components: { CommentsModal },
