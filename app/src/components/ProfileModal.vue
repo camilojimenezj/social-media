@@ -1,13 +1,13 @@
 <template>
-  <div class="modal is-active">
-    <div class="modal-background" @click="$emit('handleModal')"></div>
+  <div class="modal profile-modal">
+    <div class="modal-background" @click="$emit('profileModal')"></div>
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit profile</p>
         <button
           class="delete"
           aria-label="close"
-          @click="$emit('handleModal')"
+          @click="$emit('profileModal')"
         ></button>
       </header>
       <section class="modal-card-body">
@@ -43,7 +43,7 @@
       </section>
       <footer class="modal-card-foot">
         <button class="button is-info">Save changes</button>
-        <button class="button" @click="$emit('handleModal')">Cancel</button>
+        <button class="button" @click="$emit('profileModal')">Cancel</button>
       </footer>
     </div>
   </div>

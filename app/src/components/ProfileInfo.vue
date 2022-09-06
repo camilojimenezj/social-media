@@ -11,7 +11,7 @@
         </figure>
         <div class="username">
           <div class="title is-4">Camilo Jimenez Jaramillo</div>
-          <button class="button" @click="$emit('handleModal')">
+          <button class="button" @click="$emit('profileModal')">
             Edit profile
           </button>
         </div>

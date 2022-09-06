@@ -1,25 +1,23 @@
 <template>
   <div class="my-container">
-    <ProfileInfo @handleModal="handleModal" />
+    <ProfileInfo @profileModal="profileModal" />
     <Post />
-    <Modal v-if="modalActive" @handleModal="handleModal" />
+    <ProfileModal @profileModal="profileModal" />
   </div>
 </template>
 
 <script>
 import ProfileInfo from '../components/ProfileInfo.vue'
 import Post from '../components/Post.vue'
-import Modal from '../components/Modal.vue'
+import ProfileModal from '../components/ProfileModal.vue'
 export default {
-  components: { ProfileInfo, Post, Modal },
+  components: { ProfileInfo, Post, ProfileModal },
   data() {
-    return {
-      modalActive: false,
-    }
+    return {}
   },
   methods: {
-    handleModal() {
-      this.modalActive = !this.modalActive
+    profileModal() {
+      this.$el.querySelector('.profile-modal').classList.toggle('is-active')
     },
   },
 }
