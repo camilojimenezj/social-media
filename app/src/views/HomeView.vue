@@ -1,6 +1,6 @@
 <template>
   <div class="my-container">
-    {{ allPosts }}
+    {{ this.GStore.session.userId }}
     <Upload />
     <Post v-for="post in allPosts" :key="post.id" :post="post" />
   </div>

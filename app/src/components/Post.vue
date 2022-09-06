@@ -26,10 +26,7 @@
       </div>
       <div class="card-image">
         <figure class="image">
-          <img
-            src="http://localhost:3000/tmp/tmp-1-1662412314230"
-            alt="Placeholder image"
-          />
+          <img :src="post.img" alt="Placeholder image" />
         </figure>
       </div>
       <div class="icons-container">

@@ -3,31 +3,35 @@
     <div class="box">
       <div class="top">
         <figure class="image is-128x128">
-          <img
-            class="is-rounded"
-            src="https://bulma.io/images/placeholders/96x96.png"
-            alt="Placeholder image"
-          />
+          <img class="is-rounded" :src="userImg" alt="Placeholder image" />
         </figure>
         <div class="username">
-          <div class="title is-4">Camilo Jimenez Jaramillo</div>
+          <div class="title is-4">{{ userData.name }}</div>
           <button class="button" @click="$emit('profileModal')">
             Edit profile
           </button>
         </div>
       </div>
-      <div class="description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </div>
+      <div class="description">{{ userData.description }}</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    userData: {
+      type: Object,
+    },
+  },
+  computed: {
+    userImg() {
+      return (
+        this.userData.img || 'https://bulma.io/images/placeholders/96x96.png'
+      )
+    },
+  },
+}
 </script>
 
 <style scoped>

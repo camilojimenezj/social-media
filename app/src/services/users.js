@@ -5,3 +5,8 @@ export const registerUser = async (data) => {
   const res = await axios.post(baseUrl, data);
   return res.data
 }
+
+export const getAUser = async (id) => {
+  const res = await axios.get(baseUrl + id);
+  return res.data
+}

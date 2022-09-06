@@ -8,14 +8,26 @@
         <a class="button is-info"> Search </a>
       </div>
     </div>
-    <Post />
-    <Post />
+    <Post v-for="post in allPosts" :key="post.id" :post="post" />
   </div>
 </template>
 
 <script>
 import Post from '../components/Post.vue'
-export default { components: { Post } }
+import { getAllPosts } from '../services/posts'
+export default {
+  components: { Post },
+  data() {
+    return {
+      allPosts: [],
+    }
+  },
+  created() {
+    getAllPosts().then((res) => {
+      this.allPosts = res
+    })
+  },
+}
 </script>
 
 <style scoped>
