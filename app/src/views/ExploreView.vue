@@ -2,31 +2,50 @@
   <div class="my-container">
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input class="input" type="text" placeholder="Search" />
+        <input
+          class="input"
+          type="text"
+          placeholder="Search"
+          @input="handleSearch"
+        />
       </div>
       <div class="control">
         <a class="button is-info"> Search </a>
       </div>
     </div>
-    <Post v-for="post in allPosts" :key="post.id" :post="post" />
+    <div class="user-container">
+      <UserCard v-for="user in filterUsers" :user="user" />
+    </div>
   </div>
 </template>
 
 <script>
-import Post from '../components/Post.vue'
-import { getAllPosts } from '../services/posts'
+import { getAllUsers } from '../services/users'
+import UserCard from '../components/UserCard.vue'
 export default {
-  components: { Post },
   data() {
     return {
-      allPosts: [],
+      allUsers: [],
+      search: '',
     }
   },
+  methods: {
+    handleSearch(e) {
+      this.search = e.target.value
+    },
+  },
+  computed: {
+    filterUsers() {
+      const regex = new RegExp(this.search, 'gi')
+      return this.allUsers.filter((user) => user.name.match(regex))
+    },
+  },
   created() {
-    getAllPosts().then((res) => {
-      this.allPosts = res.reverse()
+    getAllUsers().then((res) => {
+      this.allUsers = res
     })
   },
+  components: { UserCard },
 }
 </script>
 
@@ -40,6 +59,9 @@ export default {
   gap: 50px;
 }
 .field {
+  width: 100%;
+}
+.user-container {
   width: 100%;
 }
 </style>

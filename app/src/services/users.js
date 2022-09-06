@@ -6,6 +6,11 @@ export const registerUser = async (data) => {
   return res.data
 }
 
+export const getAllUsers = async () => {
+  const res = await axios.get(baseUrl);
+  return res.data
+}
+
 export const getAUser = async (id) => {
   const res = await axios.get(baseUrl + id);
   return res.data
