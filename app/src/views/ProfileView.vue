@@ -3,7 +3,11 @@
     {{ userData }}
     <ProfileInfo :userData="userData" @profileModal="profileModal" />
     <Post v-for="post in userData.posts" :key="post.id" :post="post" />
-    <ProfileModal @profileModal="profileModal" />
+    <ProfileModal
+      :userData="userData"
+      @profileModal="profileModal"
+      @setUserData="(data) => setUserData(data)"
+    />
   </div>
 </template>
 
@@ -24,9 +28,12 @@ export default {
     profileModal() {
       this.$el.querySelector('.profile-modal').classList.toggle('is-active')
     },
+    setUserData(data) {
+      this.userData = data
+    },
   },
   created() {
-    const id = this.GStore.session.userId
+    const id = this.GStore.session.id
     getAUser(id).then((res) => {
       this.userData = res
     })

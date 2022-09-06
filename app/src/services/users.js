@@ -10,3 +10,8 @@ export const getAUser = async (id) => {
   const res = await axios.get(baseUrl + id);
   return res.data
 }
+
+export const editUser = async (id, data) => {
+  const res = await axios.put(baseUrl + id, data);
+  return res.data
+}

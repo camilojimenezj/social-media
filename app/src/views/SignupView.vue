@@ -64,6 +64,7 @@
 <script>
 import { registerUser } from '../services/users'
 export default {
+  inject: ['GStore'],
   methods: {
     handleSubmit(e) {
       e.preventDefault()
