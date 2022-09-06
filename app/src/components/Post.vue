@@ -9,11 +9,20 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">
-              {{ post.user?.name || this.GStore.session.name }}
+            <p
+              class="title is-4 username"
+              @click="
+                () =>
+                  this.$router.push({
+                    name: 'other',
+                    params: { id: post.user.id },
+                  })
+              "
+            >
+              {{ post.user?.name || defaultUser?.name }}
             </p>
             <p class="subtitle is-6">
-              @{{ post.user?.name || this.GStore.session.name }}
+              @{{ post.user?.name || defaultUser?.name }}
             </p>
           </div>
         </div>
@@ -43,7 +52,7 @@
     <CommentsModal
       @commentsModal="commentsModal"
       :post="post"
-      :defaultImg="defaultImg"
+      :defaultImg="defaultUser?.img"
     />
   </div>
 </template>
@@ -56,8 +65,8 @@ export default {
     post: {
       type: Object,
     },
-    defaultImg: {
-      type: String,
+    defaultUser: {
+      type: Object,
     },
   },
   data() {
@@ -83,7 +92,7 @@ export default {
     userImg() {
       return (
         this.post.user?.img ||
-        this.defaultImg ||
+        this.defaultUser?.img ||
         'https://bulma.io/images/placeholders/96x96.png'
       )
     },
@@ -115,5 +124,8 @@ export default {
 }
 .icon-btn.like {
   color: v-bind(likeColor);
+}
+.username {
+  cursor: pointer;
 }
 </style>

@@ -7,7 +7,7 @@
         </figure>
         <div class="username">
           <div class="title is-4">{{ userData.name }}</div>
-          <button class="button" @click="$emit('profileModal')">
+          <button v-if="!notEdit" class="button" @click="$emit('profileModal')">
             Edit profile
           </button>
         </div>
@@ -22,6 +22,9 @@ export default {
   props: {
     userData: {
       type: Object,
+    },
+    notEdit: {
+      type: Boolean,
     },
   },
   computed: {

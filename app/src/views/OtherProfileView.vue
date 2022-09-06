@@ -1,6 +1,10 @@
 <template>
   <div class="my-container" v-if="userData">
-    <ProfileInfo :userData="userData" @profileModal="profileModal" />
+    <ProfileInfo
+      :userData="userData"
+      :notEdit="true"
+      @profileModal="profileModal"
+    />
     <Post
       v-for="post in userData.posts"
       :key="post.id"
@@ -37,7 +41,7 @@ export default {
     },
   },
   created() {
-    const id = this.GStore.session.id
+    const id = this.$route.params.id
     getAUser(id).then((res) => {
       this.userData = res
     })
