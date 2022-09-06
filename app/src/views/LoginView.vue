@@ -1,10 +1,16 @@
 <template>
-  <form class="box my-container">
+  <form class="box my-container" @submit="handleSubmit">
     <div class="title">Log in</div>
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
-        <input class="input" type="email" placeholder="Text input" required />
+        <input
+          class="input"
+          type="email"
+          placeholder="Text input"
+          name="email"
+          required
+        />
       </div>
     </div>
 
@@ -15,6 +21,7 @@
           class="input"
           type="password"
           placeholder="Text input"
+          name="password"
           required
         />
       </div>
@@ -32,7 +39,34 @@
 </template>
 
 <script>
-export default {}
+import { loginUser } from '../services/login'
+export default {
+  inject: ['GStore'],
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault()
+      const user = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }
+      loginUser(user)
+        .then((res) => {
+          localStorage.setItem('loggedSocialMediaUser', JSON.stringify(res))
+          this.GStore.session = res
+          this.GStore.flashMessage = 'Successfully logged in'
+          setTimeout(() => {
+            this.GStore.flashMessage = ''
+          }, 3000)
+          e.target.reset()
+          this.$router.push('/')
+        })
+        .catch((err) => {
+          e.target.reset()
+          console.error(err)
+        })
+    },
+  },
+}
 </script>
 
 <style scoped>

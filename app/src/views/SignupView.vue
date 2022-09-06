@@ -1,18 +1,30 @@
 <template>
-  <form class="box my-container">
+  <form class="box my-container" @submit="handleSubmit">
     <div class="title">Sign in</div>
 
     <div class="field">
       <label class="label">Name</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Text input" required />
+        <input
+          class="input"
+          type="text"
+          placeholder="Text input"
+          name="name"
+          required
+        />
       </div>
     </div>
 
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
-        <input class="input" type="email" placeholder="Text input" required />
+        <input
+          class="input"
+          type="email"
+          placeholder="Text input"
+          name="email"
+          required
+        />
       </div>
     </div>
 
@@ -23,6 +35,7 @@
           class="input"
           type="password"
           placeholder="Text input"
+          name="password"
           required
         />
       </div>
@@ -49,7 +62,32 @@
 </template>
 
 <script>
-export default {}
+import { registerUser } from '../services/users'
+export default {
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault()
+      const newUser = {
+        email: e.target.email.value,
+        name: e.target.name.value,
+        password: e.target.password.value,
+      }
+      registerUser(newUser)
+        .then((res) => {
+          e.target.reset()
+          this.GStore.flashMessage = 'Successfully registered'
+          setTimeout(() => {
+            this.GStore.flashMessage = ''
+          }, 3000)
+          this.$router.push('/login')
+        })
+        .catch((err) => {
+          e.target.reset()
+          console.error(err)
+        })
+    },
+  },
+}
 </script>
 
 <style scoped>

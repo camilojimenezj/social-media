@@ -1,11 +1,14 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import router from './router'
 
 import './assets/main.css'
 
-const app = createApp(App)
+const GStore = reactive({ flashMessage: "", session: null });
 
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(router);
+app.provide("GStore", GStore);
+app.mount("#app");
+
