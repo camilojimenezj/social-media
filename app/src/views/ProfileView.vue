@@ -1,7 +1,12 @@
 <template>
   <div class="my-container" v-if="userData">
     <ProfileInfo :userData="userData" @profileModal="profileModal" />
-    <Post v-for="post in userData.posts" :key="post.id" :post="post" />
+    <Post
+      v-for="post in userData.posts"
+      :key="post.id"
+      :post="post"
+      :defaultImg="userData.img"
+    />
     <ProfileModal
       :userData="userData"
       @profileModal="profileModal"

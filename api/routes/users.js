@@ -40,7 +40,7 @@ userRouter.post('/', async (req, res) => {
 
 userRouter.put('/:id', async (req, res) => {
   const id = req.params.id
-  console.log(id)
+
   let img = ''
   if (req.files) {
     const path = req.files.img.tempFilePath

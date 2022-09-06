@@ -12,3 +12,9 @@ export const createPost = async (post) => {
   const { data } = res
   return data
 }
+
+export const addComment = async (id, comment) => {
+  const res = await axios.put(baseUrl + id + '/comments', comment)
+  const { data } = res
+  return data
+}

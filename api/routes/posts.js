@@ -7,7 +7,8 @@ const fs = require('fs-extra')
 postRouter.get('/', async (req, res) => {
   const posts = await Post.find({}).populate('user', {
     email: 1,
-    name: 1
+    name: 1,
+    img: 1
   })
   res.status(200).json(posts)
 })
@@ -38,9 +39,14 @@ postRouter.post('/', async (req, res, next) => {
     const newPost = new Post(newPostInfo)
 
     const savedPost = await newPost.save()
+    const post = await Post.findById(savedPost._id).populate('user', {
+    email: 1,
+    name: 1,
+    img: 1
+  })
     user.posts = user.posts.concat(savedPost._id)
     await user.save()
-    res.status(201).json(savedPost)
+    res.status(201).json(post)
   } catch (error) {
     next(error)
   }
@@ -75,11 +81,11 @@ postRouter.put('/:id/likes', async (req, res, next) => {
 
 postRouter.put(postRouter.put('/:id/comments', async (req, res, next) => {
   const id = req.params.id
-  const { content, name } = req.body
+  const { content, userId } = req.body
   try {
     const post = await Post.findById(id)
   
-    post.comments = post.comments.concat({ content, name })
+    post.comments = post.comments.concat({ content, userId })
 
     const updatedPost = await post.save()
     res.status(200).json(updatedPost)

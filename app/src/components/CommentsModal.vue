@@ -5,12 +5,12 @@
       <!-- Any other Bulma elements you want -->
       <div class="card">
         <div class="card-content">
-          <div class="media">
+          <form class="media" @submit="handleSubmit">
             <div class="media-left">
               <figure class="image is-48x48">
                 <img
                   class="is-rounded"
-                  src="https://bulma.io/images/placeholders/96x96.png"
+                  :src="userImg"
                   alt="Placeholder image"
                 />
               </figure>
@@ -19,32 +19,18 @@
               <div class="control">
                 <textarea
                   class="textarea has-fixed-size"
+                  name="content"
                   placeholder="Comment"
                 ></textarea>
               </div>
             </div>
-            <div class="button">Send</div>
-          </div>
-
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                <img
-                  class="is-rounded"
-                  src="https://bulma.io/images/placeholders/96x96.png"
-                  alt="Placeholder image"
-                />
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="subtitle is-6">John Smith</p>
-              <p>
-                Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at
-                eros. Donec id elit non mi porta gravida at eget metus. Cum
-                sociis natoque
-              </p>
-            </div>
-          </div>
+            <button class="button">Send</button>
+          </form>
+          <Comment
+            v-for="comment in oderComments"
+            :key="comment.id"
+            :comment="comment"
+          />
         </div>
       </div>
       <!-- Any other Bulma elements you want -->
@@ -58,7 +44,52 @@
 </template>
 
 <script>
-export default {}
+import { addComment } from '../services/posts'
+import Comment from './Comment.vue'
+
+export default {
+  inject: ['GStore'],
+  props: {
+    post: {
+      type: Object,
+    },
+    defaultImg: {
+      type: String,
+    },
+  },
+  components: { Comment },
+  data() {
+    return {
+      postArr: this.post,
+    }
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault()
+      const postId = this.postArr.id
+      const userId = this.GStore.session.id
+      console.log(userId)
+      const content = e.target.content.value
+      addComment(postId, { content, userId }).then((res) => {
+        e.target.reset()
+        this.postArr = res
+      })
+    },
+  },
+  components: { Comment },
+  computed: {
+    userImg() {
+      return (
+        this.post.user?.img ||
+        this.defaultImg ||
+        'https://bulma.io/images/placeholders/96x96.png'
+      )
+    },
+    oderComments() {
+      return this.postArr.comments.reverse()
+    },
+  },
+}
 </script>
 
 <style scoped>

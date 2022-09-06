@@ -5,11 +5,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-48x48">
-              <img
-                class="is-rounded"
-                src="https://bulma.io/images/placeholders/96x96.png"
-                alt="Placeholder image"
-              />
+              <img class="is-rounded" :src="userImg" alt="Placeholder image" />
             </figure>
           </div>
           <div class="media-content">
@@ -44,7 +40,11 @@
         </div>
       </div>
     </div>
-    <CommentsModal @commentsModal="commentsModal" />
+    <CommentsModal
+      @commentsModal="commentsModal"
+      :post="post"
+      :defaultImg="defaultImg"
+    />
   </div>
 </template>
 
@@ -55,6 +55,9 @@ export default {
   props: {
     post: {
       type: Object,
+    },
+    defaultImg: {
+      type: String,
     },
   },
   data() {
@@ -76,6 +79,13 @@ export default {
       const newDate = new Date(date)
 
       return newDate.toDateString()
+    },
+    userImg() {
+      return (
+        this.post.user?.img ||
+        this.defaultImg ||
+        'https://bulma.io/images/placeholders/96x96.png'
+      )
     },
   },
   components: { CommentsModal },
