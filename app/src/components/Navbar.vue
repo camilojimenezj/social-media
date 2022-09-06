@@ -37,8 +37,14 @@
             <a class="button">
               <RouterLink to="/signup"><strong>Sign up</strong></RouterLink>
             </a>
-            <a class="button is-light"
+            <a class="button is-light" v-if="!this.GStore.session"
               ><RouterLink to="/login"> Log in </RouterLink></a
+            >
+            <a
+              class="button is-light"
+              v-if="this.GStore.session"
+              @click="handleLogout"
+              ><RouterLink to="/login"> Log out </RouterLink></a
             >
           </div>
         </div>
@@ -50,8 +56,15 @@
 <script>
 import { RouterLink } from 'vue-router'
 export default {
+  inject: ['GStore'],
   components: { RouterLink },
+  methods: {
+    handleLogout() {
+      localStorage.removeItem('loggedSocialMediaUser')
+      location.reload()
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
