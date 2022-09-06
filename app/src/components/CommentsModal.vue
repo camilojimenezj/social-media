@@ -68,7 +68,7 @@ export default {
       e.preventDefault()
       const postId = this.postArr.id
       const userId = this.GStore.session.id
-      console.log(userId)
+
       const content = e.target.content.value
       addComment(postId, { content, userId }).then((res) => {
         e.target.reset()
@@ -80,8 +80,7 @@ export default {
   computed: {
     userImg() {
       return (
-        this.post.user?.img ||
-        this.defaultImg ||
+        this.GStore.session.img ||
         'https://bulma.io/images/placeholders/96x96.png'
       )
     },
