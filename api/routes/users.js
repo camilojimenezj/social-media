@@ -1,7 +1,8 @@
 const userRouter = require('express').Router()
 const User = require('../models/User')
-const Post = require('../models/Post')
 const bcrypt = require('bcrypt')
+const uploadImage = require('../utils/cloudinary')
+const fs = require('fs-extra')
 
 userRouter.get('/', async (req, res) => {
   const users = await User.find({})
@@ -38,8 +39,17 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.put('/:id', async (req, res) => {
-  const img = req.files?.img.tempFilePath
   const id = req.params.id
+
+  let img = ''
+  if (req.files) {
+    const path = req.files.img.tempFilePath
+    const imageUploaded = await uploadImage(path)
+    await fs.unlink(path)
+  
+    img = imageUploaded.secure_url
+  }
+
   let newUserInfo
   if (img) {
     newUserInfo = {

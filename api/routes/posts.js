@@ -1,6 +1,8 @@
 const postRouter = require('express').Router()
 const Post = require('../models/Post')
 const User = require('../models/User')
+const uploadImage = require('../utils/cloudinary')
+const fs = require('fs-extra')
 
 postRouter.get('/', async (req, res) => {
   const posts = await Post.find({}).populate('user', {
@@ -13,7 +15,15 @@ postRouter.get('/', async (req, res) => {
 postRouter.post('/', async (req, res, next) => {
   try {
     const { content, userId } = req.body
-    const img = req.files?.img.tempFilePath
+    
+    let img = ''
+    if (req.files) {
+      const path = req.files.img.tempFilePath
+      const imageUploaded = await uploadImage(path)
+      await fs.unlink(path)
+  
+      img = imageUploaded.secure_url
+    }
 
     const user = await User.findById(userId)
 
