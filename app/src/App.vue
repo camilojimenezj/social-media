@@ -19,7 +19,6 @@ export default {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       getAUser(user.id).then((res) => {
-        console.log(res)
         this.GStore.session = res
       })
     } else {
