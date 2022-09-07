@@ -46,7 +46,7 @@ export default {
   inject: ['GStore'],
   data() {
     return {
-      userData: null,
+      userData: this.GStore.session,
       file: null,
     }
   },
@@ -76,9 +76,6 @@ export default {
         this.userData.img || 'https://bulma.io/images/placeholders/96x96.png'
       )
     },
-  },
-  created() {
-    this.userData = this.GStore.session
   },
 }
 </script>

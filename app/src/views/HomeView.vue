@@ -1,5 +1,5 @@
 <template>
-  <div class="my-container">
+  <div class="my-container" v-if="this.GStore.session">
     <Upload @setNewPost="(data) => setNewPost(data)" />
     <Post v-for="post in allPosts" :key="post.id" :post="post" />
   </div>
