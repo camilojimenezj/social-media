@@ -54,21 +54,13 @@ postRouter.post('/', async (req, res, next) => {
 
 postRouter.put('/:id/likes', async (req, res, next) => {
   const id = req.params.id
-  const { type } = req.body
+  const { userId, type } = req.body
   try {
     const post = await Post.findById(id)
     if (type === '+') { 
-      if (!post.likes) {
-        post.likes = 1
-      } else {
-        post.likes += 1
-      }
+      post.likes = post.likes.concat(userId)
     } else {
-      if (!post.likes) {
-        post.likes = 0
-      } else {
-        post.likes += -1
-      }
+      post.likes = post.likes.filter(id => id != userId)
     }
 
     const updatedPost = await post.save()

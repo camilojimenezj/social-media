@@ -7,7 +7,7 @@ const postSchema = new Schema({
     required: true
   },
   img: String,
-  likes: Number,
+  likes: [Schema.Types.ObjectId],
   date: Date,
   comments: [{
     content: String,
