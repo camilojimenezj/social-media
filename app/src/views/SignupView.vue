@@ -76,13 +76,17 @@ export default {
       registerUser(newUser)
         .then((res) => {
           e.target.reset()
-          this.GStore.flashMessage = 'Successfully registered'
+          this.GStore.successMessage = 'Successfully registered'
           setTimeout(() => {
-            this.GStore.flashMessage = ''
+            this.GStore.successMessage = ''
           }, 3000)
           this.$router.push('/login')
         })
         .catch((err) => {
+          this.GStore.errorMessage = 'Invalid email'
+          setTimeout(() => {
+            this.GStore.errorMessage = ''
+          }, 3000)
           e.target.reset()
           console.error(err)
         })

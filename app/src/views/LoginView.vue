@@ -53,14 +53,18 @@ export default {
         .then((res) => {
           localStorage.setItem('loggedSocialMediaUser', JSON.stringify(res))
           this.GStore.session = res
-          this.GStore.flashMessage = 'Successfully logged in'
+          this.GStore.successMessage = 'Successfully logged in'
           setTimeout(() => {
-            this.GStore.flashMessage = ''
+            this.GStore.successMessage = ''
           }, 3000)
           e.target.reset()
           this.$router.push('/')
         })
         .catch((err) => {
+          this.GStore.errorMessage = 'Invalid email or password'
+          setTimeout(() => {
+            this.GStore.errorMessage = ''
+          }, 3000)
           e.target.reset()
           console.error(err)
         })

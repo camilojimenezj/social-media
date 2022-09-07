@@ -4,7 +4,7 @@ import router from './router'
 
 import './assets/main.css'
 
-const GStore = reactive({ flashMessage: "", session: null });
+const GStore = reactive({ successMessage: '', errorMessage: '', session: null });
 
 const app = createApp(App);
 
