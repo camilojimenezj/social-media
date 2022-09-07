@@ -10,6 +10,7 @@
 <script>
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+import { getAUser } from './services/users'
 export default {
   inject: ['GStore'],
   components: { RouterView, Navbar },
@@ -17,7 +18,10 @@ export default {
     const loggedUserJSON = localStorage.getItem('loggedSocialMediaUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      this.GStore.session = user
+      getAUser(user.id).then((res) => {
+        console.log(res)
+        this.GStore.session = res
+      })
     } else {
       this.$router.push('/login')
     }

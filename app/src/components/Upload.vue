@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { getAUser } from '../services/users'
 import { createPost } from '../services/posts'
 
 export default {
@@ -57,32 +56,29 @@ export default {
     },
     handleSubmit(e) {
       e.preventDefault()
-      const id = this.GStore.session.id
+      const id = this.userData.id
       const formdata = new FormData()
       formdata.append('content', e.target.content.value)
       formdata.append('userId', id)
+      this.$el.querySelector('button').classList.add('is-loading')
       if (this.file) formdata.append('img', this.file)
       createPost(formdata).then((res) => {
-        console.log(res)
-        res.user.name = this.GStore.session.name
-        console.log(res)
+        res.user.name = this.userData.name
         this.$emit('setNewPost', res)
         e.target.reset()
+        this.$el.querySelector('button').classList.remove('is-loading')
       })
     },
   },
   computed: {
     userImg() {
       return (
-        this.userData?.img || 'https://bulma.io/images/placeholders/96x96.png'
+        this.userData.img || 'https://bulma.io/images/placeholders/96x96.png'
       )
     },
   },
   created() {
-    const id = this.GStore.session.id
-    getAUser(id).then((res) => {
-      this.userData = res
-    })
+    this.userData = this.GStore.session
   },
 }
 </script>

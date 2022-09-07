@@ -61,7 +61,13 @@ userRouter.put('/:id', async (req, res) => {
   }
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, newUserInfo, { new: true }).populate('posts', {
+      content: 1,
+      img: 1,
+      likes: 1,
+      date: 1,
+      comments: 1
+    })
   
     res.status(200).json(updatedUser)
     

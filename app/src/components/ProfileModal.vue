@@ -42,7 +42,9 @@
         <!-- Content ... -->
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-info" type="submit">Save changes</button>
+        <button class="button is-info submit-btn" type="submit">
+          Save changes
+        </button>
         <button class="button" @click="$emit('profileModal')">Cancel</button>
       </footer>
     </form>
@@ -74,11 +76,14 @@ export default {
       const formdata = new FormData()
       formdata.append('description', e.target.description.value)
       if (this.file) formdata.append('img', this.file)
+      this.$el.querySelector('.submit-btn').classList.add('is-loading')
       editUser(id, formdata).then((res) => {
         console.log(res)
-        this.$emit('setUserData', res)
+        this.GStore.session = res
         this.$emit('profileModal')
+        this.$el.querySelector('.submit-btn').classList.remove('is-loading')
         e.target.reset()
+        location.reload()
       })
     },
   },
