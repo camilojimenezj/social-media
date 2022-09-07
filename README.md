@@ -10,7 +10,7 @@ https://social-media-camilo.herokuapp.com/
 ## Screenshots
 
 ### Desktop
-![Captura de pantalla 2022-09-07 104000](https://user-images.githubusercontent.com/102927455/188921044-108f96ea-5fee-401f-a57c-818889edb982.jpg)
+![Captura de pantalla 2022-09-07 104000 (2)](https://user-images.githubusercontent.com/102927455/188925918-c73d7b9d-398f-415e-9093-2c4f8fec74e8.jpg)
 ### Mobile
 <img src="https://user-images.githubusercontent.com/102927455/188921470-53d5c0bb-8214-4365-bc49-34152feef55e.jpeg" style="width: 400px" />
 
