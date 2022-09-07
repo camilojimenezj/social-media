@@ -2,6 +2,7 @@
   <div class="my-container" v-if="userData">
     <ProfileInfo :userData="userData" @profileModal="profileModal" />
     <Post
+      v-if="userData.posts"
       v-for="post in posts"
       :key="post.id"
       :post="post"
@@ -15,6 +16,7 @@
 import ProfileInfo from '../components/ProfileInfo.vue'
 import Post from '../components/Post.vue'
 import ProfileModal from '../components/ProfileModal.vue'
+import { getAUser } from '../services/users'
 export default {
   components: { ProfileInfo, Post, ProfileModal },
   inject: ['GStore'],
@@ -30,12 +32,15 @@ export default {
   },
   computed: {
     posts() {
-      const posts = [...this.userData.posts]
+      const posts = [...this.userData?.posts]
       return posts.reverse()
     },
   },
   created() {
-    this.userData = this.GStore.session
+    const id = this.GStore.session.id
+    getAUser(id).then((res) => {
+      this.userData = res
+    })
   },
 }
 </script>

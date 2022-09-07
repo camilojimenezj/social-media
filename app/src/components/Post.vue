@@ -119,7 +119,6 @@ export default {
   created() {
     let userId = this.GStore.session.id
     if (this.post.likes.some((id) => id == userId)) {
-      console.log(true)
       this.like = true
     }
   },
