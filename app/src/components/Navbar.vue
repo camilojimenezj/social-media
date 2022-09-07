@@ -85,4 +85,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.navbar {
+  position: sticky;
+  top: 0;
+}
+</style>
