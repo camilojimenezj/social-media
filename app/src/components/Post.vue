@@ -33,7 +33,7 @@
         <div class="content">
           {{ post.content }}
           <br />
-          <time datetime="2016-1-1">{{ dateString }}</time>
+          <time class="time" datetime="2016-1-1">{{ dateString }}</time>
         </div>
       </div>
       <div class="card-image" v-if="post.img">
@@ -46,9 +46,10 @@
           <span class="material-icons-outlined"> mode_comment </span>
           <span>Comment</span>
         </div>
-        <div class="icon-btn like" @click="handleColor">
+        <div class="icon-btn like" @click="handleLike">
           <span class="material-icons-outlined"> favorite_border </span>
           <span>Like</span>
+          <span class="likes-count">{{ likeCount }}</span>
         </div>
       </div>
     </div>
@@ -62,7 +63,9 @@
 
 <script>
 import CommentsModal from './CommentsModal.vue'
+import { toggleLike } from '../services/posts'
 export default {
+  components: { CommentsModal },
   inject: ['GStore'],
   props: {
     post: {
@@ -74,12 +77,22 @@ export default {
   },
   data() {
     return {
-      likeColor: 'black',
+      like: false,
+      likeCount: this.post.likes.length,
     }
   },
   methods: {
-    handleColor() {
-      this.likeColor = '#EB5757'
+    handleLike() {
+      if (this.like) {
+        toggleLike(this.post.id, this.GStore.session.id, '-').then((res) => {
+          this.likeCount--
+        })
+      } else {
+        toggleLike(this.post.id, this.GStore.session.id, '+').then((res) => {
+          this.likeCount++
+        })
+      }
+      this.like = !this.like
     },
     commentsModal() {
       this.$el.querySelector('.comments-modal').classList.toggle('is-active')
@@ -99,8 +112,17 @@ export default {
         'https://bulma.io/images/placeholders/96x96.png'
       )
     },
+    likeColor() {
+      return this.like ? '#EB5757' : 'black'
+    },
   },
-  components: { CommentsModal },
+  created() {
+    let userId = this.GStore.session.id
+    if (this.post.likes.some((id) => id == userId)) {
+      console.log(true)
+      this.like = true
+    }
+  },
 }
 </script>
 
@@ -127,6 +149,7 @@ export default {
 }
 .icon-btn.like {
   color: v-bind(likeColor);
+  user-select: none;
 }
 .username {
   cursor: pointer;
@@ -138,6 +161,13 @@ export default {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+}
+.likes-count {
+  font-size: 12px;
+}
+.time {
+  color: rgba(66, 75, 135, 0.737);
+  font-size: 14px;
 }
 
 @media screen and (max-width: 600px) {

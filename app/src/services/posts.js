@@ -18,3 +18,9 @@ export const addComment = async (id, comment) => {
   const { data } = res
   return data
 }
+
+export const toggleLike = async (id, userId, type) => {
+  const res = await axios.put(baseUrl + id + '/likes', {userId, type})
+  const { data } = res
+  return data
+}
