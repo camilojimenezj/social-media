@@ -103,7 +103,6 @@ export default {
     dateString() {
       const date = this.post.date
       const momentDate = moment(date).fromNow()
-      const newDate = new Date(date)
 
       return momentDate
     },
