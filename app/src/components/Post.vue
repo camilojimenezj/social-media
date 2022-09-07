@@ -64,6 +64,7 @@
 <script>
 import CommentsModal from './CommentsModal.vue'
 import { toggleLike } from '../services/posts'
+import moment from 'moment'
 export default {
   components: { CommentsModal },
   inject: ['GStore'],
@@ -101,9 +102,10 @@ export default {
   computed: {
     dateString() {
       const date = this.post.date
+      const momentDate = moment(date).fromNow()
       const newDate = new Date(date)
 
-      return newDate.toDateString()
+      return momentDate
     },
     userImg() {
       return (
