@@ -21,8 +21,9 @@ https://social-media-camilo.herokuapp.com/
 3. MongoDB
 4. Vue
 5. jsonwebtoken
-8. Cloudinary
-9. Momentjs
+6. Cloudinary
+7. Momentjs
+8. Bulma UI
 
 ## Customize configuration
 
