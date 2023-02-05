@@ -19,7 +19,8 @@
     "express-fileupload": "^1.4.0",
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.5.4"
+    "mongoose": "^6.5.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
